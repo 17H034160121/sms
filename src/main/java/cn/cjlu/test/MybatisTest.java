@@ -24,7 +24,7 @@ public class MybatisTest {
 
     @Before
     public void getConnection() throws IOException {
-        in = Resources.getResourceAsStream("DEV/SqlMapConfig.xml");
+        in = Resources.getResourceAsStream("SqlMapConfig.xml");
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(in);
         sqlSession = sqlSessionFactory.openSession();
     }

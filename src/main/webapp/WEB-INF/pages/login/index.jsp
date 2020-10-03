@@ -5,7 +5,7 @@
 	<meta name="author" content="Kodinger">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<title>My Login Page</title>
-	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="/css/my-login.css">
 </head>
 
@@ -67,9 +67,9 @@
 		</div>
 	</section>
 
-	<script src="/js/jquery-3.3.1.min.js"></script>
-	<script src="/js/popper.min.js"></script>
-	<script src="/js/bootstrap.bundle.min.js"></script>
+	<script src="/js/jquery/jquery-3.3.1.min.js"></script>
+	<script src="/js/popper/popper.min.js"></script>
+	<script src="/js/bootstrap/bootstrap.bundle.min.js"></script>
 	<script src="/js/my-login.js"></script>
 </body>
 </html>
