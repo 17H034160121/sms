@@ -11,7 +11,7 @@
   </listener>
   <context-param>
     <param-name>contextConfigLocation</param-name>
-    <param-value>classpath:DEV/applicationContext.xml</param-value>
+    <param-value>classpath:applicationContext.xml</param-value>
   </context-param>
 
   <servlet>
@@ -20,7 +20,7 @@
     <!-- 设置初始化配置文件所在位置 -->
     <init-param>
       <param-name>contextConfigLocation</param-name>
-      <param-value>classpath:DEV/springmvc.xml</param-value>
+      <param-value>classpath:springmvc.xml</param-value>
     </init-param>
     <!-- 启动加载spring mvc配置 -->
     <load-on-startup>1</load-on-startup>

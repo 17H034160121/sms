@@ -12,7 +12,7 @@ public class SpringTest {
 
     @Test
     public void beanCheck(){
-        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:DEV/applicationContext.xml");
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
         UserService userService = (UserService) applicationContext.getBean("userService");
         userService.findAllUsers();
     }
