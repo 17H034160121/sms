@@ -1,20 +1,14 @@
-package cn.cjlu.dto;
+package cn.cjlu.form;
 
 import java.io.Serializable;
 
-public class UserDto implements Serializable {
-    private int id;
+/**
+ * @create: 2020-10-04 14:51
+ */
+public class UserForm implements Serializable {
+
     private String username;
     private String password;
-    private String authority;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getUsername() {
         return username;
@@ -30,13 +24,5 @@ public class UserDto implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getAuthority() {
-        return authority;
-    }
-
-    public void setAuthority(String authority) {
-        this.authority = authority;
     }
 }

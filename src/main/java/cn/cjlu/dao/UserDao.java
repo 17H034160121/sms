@@ -18,12 +18,23 @@ public interface UserDao {
      * @return
      */
     @Select("select * from user")
-    public List<UserDto> findAll();
+    List<UserDto> findAll();
 
     /**
      * Description : 保存新用户信息
      * @param userDto
      */
-    @Insert("insert into user(username, password, authority) values (#{username}, #{password}, '2')")
-    public void saveUser(UserDto userDto);
+    @Insert("insert into user(username, password, authority) values (#{username}, #{password}, #{authority})")
+    void saveUser(UserDto userDto);
+
+    /**
+     * Description : 检查用户是否存在
+     * @param username
+     * @param password
+     * @return
+     */
+    @Select("select count(1) from user where username = #{username} and password = #{password}")
+    boolean checkUser(String username, String password);
+
+    boolean checkUsername(String username);
 }

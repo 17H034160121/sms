@@ -1,10 +1,7 @@
 
 $(function() {
 
-	// author badge :)
-	var author = '<div style="position: fixed;bottom: 0;right: 20px;background-color: #fff;box-shadow: 0 4px 8px rgba(0,0,0,.05);border-radius: 3px 3px 0 0;font-size: 12px;padding: 5px 10px;">By <a href="https://twitter.com/mhdnauvalazhar">@mhdnauvalazhar</a> &nbsp;&bull;&nbsp; <a href="https://www.buymeacoffee.com/mhdnauvalazhar">Buy me a Coffee</a></div>';
-	$("body").append(author);
-
+	//为空检查
 	$("input[type='password'][data-eye]").each(function(i) {
 		var $this = $(this),
 			id = 'eye-password-' + i,
@@ -59,6 +56,7 @@ $(function() {
 		});
 	});
 
+	//登录表单提交事件
 	$(".my-login-validation").submit(function() {
 		var form = $(this);
         if (form[0].checkValidity() === false) {
@@ -67,4 +65,61 @@ $(function() {
         }
 		form.addClass('was-validated');
 	});
+
 });
+
+//登录表单提交方法
+function loginM(){
+	event.preventDefault();
+	$.ajax({
+		type: "post",
+		url: "/user/login",
+		contentType: "application/json;charse=UTF-8",
+		data: $('#loginForm').serializeArray(),
+		success:function (data){
+
+		}
+	})
+}
+
+//注册表单提交方法
+function register(){
+	event.preventDefault();
+	$.ajax({
+		type: "post",
+		url: "/user/register",
+		contentType: "application/json;charse=UTF-8",
+		data: $('#registerForm').serializeArray(),
+		success:function (data){
+
+		}
+	})
+}
+
+//忘记密码表单提交方法
+function forget(){
+	event.preventDefault();
+	$.ajax({
+		type: "post",
+		url: "/user/forget",
+		contentType: "application/json;charse=UTF-8",
+		data: $('#forgetForm').serializeArray(),
+		success:function (data){
+
+		}
+	})
+}
+
+//重置密码表单提交方法
+function reset(){
+	event.preventDefault();
+	$.ajax({
+		type: "post",
+		url: "/user/reset",
+		contentType: "application/json;charse=UTF-8",
+		data: $('#resetForm').serializeArray(),
+		success:function (data){
+
+		}
+	})
+}

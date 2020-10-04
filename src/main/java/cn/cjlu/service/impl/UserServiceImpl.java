@@ -2,6 +2,9 @@ package cn.cjlu.service.impl;
 
 import cn.cjlu.dao.UserDao;
 import cn.cjlu.dto.UserDto;
+import cn.cjlu.form.UserForm;
+import cn.cjlu.global.GlobalConstant;
+import cn.cjlu.global.MsgConstant;
 import cn.cjlu.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +27,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void registerUser() {
+    public String registerUser(UserForm userForm) {
+        if(userDao.checkUsername(userForm.getUsername())){
+            return MsgConstant.USERNAME_ERROR;
+        }
+        UserDto userDto = new UserDto();
+        userDto.setUsername(userForm.getUsername());
+        userDto.setPassword(userForm.getPassword());
+        userDto.setAuthority(GlobalConstant.DEFAULT_USER_AUTHORITY);
+        userDao.saveUser(userDto);
+        return "";
+    }
 
+    @Override
+    public boolean checkUser(UserForm userForm) {
+        return userDao.checkUser(userForm.getUsername(), userForm.getPassword());
     }
 }

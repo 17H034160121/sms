@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<meta name="author" content="Kodinger">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<title>My Login Page &mdash; Bootstrap 4 Login Page Snippet</title>
 	<link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css">
@@ -18,22 +17,22 @@
 					</div>
 					<div class="card fat">
 						<div class="card-body">
-							<h4 class="card-title">Forgot Password</h4>
-							<form method="POST" class="my-login-validation" novalidate="">
+							<h4 class="card-title">忘记密码</h4>
+							<form id="forgetForm" method="POST" class="my-login-validation" novalidate="" onclick="forget()">
 								<div class="form-group">
-									<label for="email">E-Mail Address</label>
-									<input id="email" type="email" class="form-control" name="email" value="" required autofocus>
+									<label for="username">E-Mail Address</label>
+									<input id="username" type="text" class="form-control" name="username" value="" required autofocus>
 									<div class="invalid-feedback">
-										Email is invalid
+										用户名不合法！
 									</div>
 									<div class="form-text text-muted">
-										By clicking "Reset Password" we will send a password reset link
+										请点击重置密码按钮，我们会跳转重置密码网页。
 									</div>
 								</div>
 
 								<div class="form-group m-0">
 									<button type="submit" class="btn btn-primary btn-block">
-										Reset Password
+										重置密码
 									</button>
 								</div>
 							</form>

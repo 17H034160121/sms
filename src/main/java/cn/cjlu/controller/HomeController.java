@@ -11,6 +11,20 @@ public class HomeController {
 
     @RequestMapping("/")
     public String loginPage(){
-        return "/login/index";
+        return "/login/login";
+    }
+
+    @RequestMapping("/register")
+    public String registerPage(){
+        return "/login/register";
+    }
+
+    @RequestMapping("/reset")
+    public String resetPage(){
+        return "/login/reset";
+    }
+    @RequestMapping("/forget")
+    public String forgetPage(){
+        return "forget";
     }
 }

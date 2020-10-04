@@ -2,9 +2,8 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<meta name="author" content="Kodinger">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<title>My Login Page</title>
+	<title>SMS登录</title>
 	<link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="/css/my-login.css">
 </head>
@@ -19,32 +18,32 @@
 					</div>
 					<div class="card fat">
 						<div class="card-body">
-							<h4 class="card-title">Login</h4>
-							<form method="POST" class="my-login-validation" novalidate="">
+							<h4 class="card-title">登录</h4>
+							<form id="userForm" method="POST" class="my-login-validation" novalidate="" onclick="loginM()">
 								<div class="form-group">
-									<label for="email">E-Mail Address</label>
-									<input id="email" type="email" class="form-control" name="email" value="" required autofocus>
+									<label for="username">E-Mail Address</label>
+									<input id="username" type="text" class="form-control" name="username" value="" required autofocus>
 									<div class="invalid-feedback">
-										Email is invalid
+										用户名不能为空
 									</div>
 								</div>
 
 								<div class="form-group">
 									<label for="password">Password
-										<a href="forgot.jsp" class="float-right">
-											Forgot Password?
+										<a href="forget" class="float-right">
+											忘记密码？
 										</a>
 									</label>
 									<input id="password" type="password" class="form-control" name="password" required data-eye>
 								    <div class="invalid-feedback">
-								    	Password is required
+								    	密码不能为空
 							    	</div>
 								</div>
 
 								<div class="form-group">
 									<div class="custom-checkbox custom-control">
 										<input type="checkbox" name="remember" id="remember" class="custom-control-input">
-										<label for="remember" class="custom-control-label">Remember Me</label>
+										<label for="remember" class="custom-control-label">记住我</label>
 									</div>
 								</div>
 
@@ -54,7 +53,7 @@
 									</button>
 								</div>
 								<div class="mt-4 text-center">
-									Don't have an account? <a href="register.jsp">Create One</a>
+									没有账号? <a href="register">注册</a>
 								</div>
 							</form>
 						</div>
