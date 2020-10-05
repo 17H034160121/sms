@@ -23,8 +23,9 @@ public class HomeController {
     public String resetPage(){
         return "/login/reset";
     }
+
     @RequestMapping("/forget")
     public String forgetPage(){
-        return "forget";
+        return "/login/forget";
     }
 }

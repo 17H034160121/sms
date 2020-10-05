@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,13 +19,13 @@
 					<div class="card fat">
 						<div class="card-body">
 							<h4 class="card-title">注册</h4>
-							<form id="registerForm" method="POST" class="my-login-validation" novalidate="" onclick="register()">
+							<form id="registerForm" method="POST" class="my-register-validation" novalidate="" onclick="register()">
 
 								<div class="form-group">
 									<label for="username">E-Mail Address</label>
 									<input id="username" type="text" class="form-control" name="username" required>
 									<div class="invalid-feedback">
-										Your email is invalid
+										用户名不能为空
 									</div>
 								</div>
 
@@ -37,7 +38,7 @@
 								</div>
 
 								<div class="form-group">
-									<label for="re-password">Password</label>
+									<label for="re-password">RePassword</label>
 									<input id="re-password" type="password" class="form-control" name="re-password" required data-eye>
 									<div class="invalid-feedback">
 										两次输入密码不一致
@@ -72,6 +73,22 @@
 			</div>
 		</div>
 	</section>
+
+	<!-- 提示框 -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">提示</h4>
+				</div>
+				<div class="modal-body" id="message"></div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">确认</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal -->
+	</div>
 
 	<script src="/js/jquery/jquery-3.3.1.min.js"></script>
 	<script src="/js/bootstrap/bootstrap.min.js"></script>

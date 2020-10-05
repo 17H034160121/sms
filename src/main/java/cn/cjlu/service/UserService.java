@@ -28,5 +28,11 @@ public interface UserService {
      * @param userForm
      * @return
      */
-    boolean checkUser(UserForm userForm);
+    boolean findUser(UserForm userForm);
+
+    /**
+     * Description : 重置用户密码
+     * @param userForm
+     */
+    void resetPassword(UserForm userForm);
 }

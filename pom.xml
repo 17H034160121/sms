@@ -87,7 +87,7 @@
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
-      <version>5.1.6</version>
+      <version>8.0.15</version>
     </dependency>
     <dependency>
       <groupId>org.mybatis</groupId>
@@ -102,7 +102,7 @@
     <dependency>
       <groupId>com.alibaba</groupId>
       <artifactId>druid</artifactId>
-      <version>1.0.9</version>
+      <version>1.1.10</version>
     </dependency>
     <dependency>
       <groupId>javax.servlet.jsp</groupId>
@@ -124,6 +124,21 @@
       <groupId>org.aspectj</groupId >
       <artifactId>aspectjweaver</artifactId >
       <version>1.6.11</version >
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-core</artifactId>
+      <version>2.9.8</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.9.8</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-annotations</artifactId>
+      <version>2.9.8</version>
     </dependency>
   </dependencies>
 

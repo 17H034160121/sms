@@ -1,3 +1,5 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,9 +21,9 @@
 					<div class="card fat">
 						<div class="card-body">
 							<h4 class="card-title">登录</h4>
-							<form id="userForm" method="POST" class="my-login-validation" novalidate="" onclick="loginM()">
+							<form id="loginForm" method="POST" class="my-login-validation" novalidate="" onclick="">
 								<div class="form-group">
-									<label for="username">E-Mail Address</label>
+									<label for="username">用户名</label>
 									<input id="username" type="text" class="form-control" name="username" value="" required autofocus>
 									<div class="invalid-feedback">
 										用户名不能为空
@@ -29,7 +31,7 @@
 								</div>
 
 								<div class="form-group">
-									<label for="password">Password
+									<label for="password">密码
 										<a href="forget" class="float-right">
 											忘记密码？
 										</a>
@@ -49,7 +51,7 @@
 
 								<div class="form-group m-0">
 									<button type="submit" class="btn btn-primary btn-block">
-										Login
+										登录
 									</button>
 								</div>
 								<div class="mt-4 text-center">
@@ -65,6 +67,22 @@
 			</div>
 		</div>
 	</section>
+
+	<!-- 提示框 -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">提示</h4>
+				</div>
+				<div class="modal-body" id="message"></div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">确认</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal -->
+	</div>
 
 	<script src="/js/jquery/jquery-3.3.1.min.js"></script>
 	<script src="/js/popper/popper.min.js"></script>

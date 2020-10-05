@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +21,7 @@
 							<h4 class="card-title">忘记密码</h4>
 							<form id="forgetForm" method="POST" class="my-login-validation" novalidate="" onclick="forget()">
 								<div class="form-group">
-									<label for="username">E-Mail Address</label>
+									<label for="username">用户名</label>
 									<input id="username" type="text" class="form-control" name="username" value="" required autofocus>
 									<div class="invalid-feedback">
 										用户名不合法！
@@ -45,6 +46,22 @@
 			</div>
 		</div>
 	</section>
+
+	<!-- 提示框 -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">提示</h4>
+				</div>
+				<div class="modal-body" id="message"></div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">确认</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal -->
+	</div>
 
 	<script src="/js/jquery/jquery-3.3.1.min.js"></script>
 	<script src="/js/my-login.js"></script>

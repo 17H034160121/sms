@@ -40,7 +40,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean checkUser(UserForm userForm) {
+    public boolean findUser(UserForm userForm) {
         return userDao.checkUser(userForm.getUsername(), userForm.getPassword());
+    }
+
+    @Override
+    public void resetPassword(UserForm userForm) {
+        userDao.updatePassword(userForm.getUsername(),userForm.getPassword());
     }
 }

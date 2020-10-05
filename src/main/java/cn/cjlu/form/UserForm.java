@@ -1,11 +1,9 @@
 package cn.cjlu.form;
 
-import java.io.Serializable;
-
 /**
  * @create: 2020-10-04 14:51
  */
-public class UserForm implements Serializable {
+public class UserForm {
 
     private String username;
     private String password;
@@ -24,5 +22,13 @@ public class UserForm implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "UserForm{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }

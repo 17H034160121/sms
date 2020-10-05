@@ -3,7 +3,7 @@ $(function() {
 
 	//为空检查
 	$("input[type='password'][data-eye]").each(function(i) {
-		var $this = $(this),
+		let $this = $(this),
 			id = 'eye-password-' + i,
 			el = $('#' + id);
 
@@ -16,7 +16,7 @@ $(function() {
 			paddingRight: 60
 		});
 		$this.after($("<div/>", {
-			html: 'Show',
+			html: '显示',
 			class: 'btn btn-primary btn-sm',
 			id: 'passeye-toggle-'+i,
 		}).css({
@@ -33,7 +33,7 @@ $(function() {
 			id: 'passeye-' + i
 		}));
 
-		var invalid_feedback = $this.parent().parent().find('.invalid-feedback');
+		let invalid_feedback = $this.parent().parent().find('.invalid-feedback');
 
 		if(invalid_feedback.length) {
 			$this.after(invalid_feedback.clone());
@@ -58,11 +58,49 @@ $(function() {
 
 	//登录表单提交事件
 	$(".my-login-validation").submit(function() {
-		var form = $(this);
-        if (form[0].checkValidity() === false) {
-          event.preventDefault();
+		let form = $(this);
+		event.preventDefault();
+		if (form[0].checkValidity() === false) {
           event.stopPropagation();
-        }
+        }else{
+			loginM();
+		}
+		form.addClass('was-validated');
+	});
+
+	//注册表单提交事件
+	$(".my-register-validation").submit(function() {
+		let form = $(this);
+		event.preventDefault();
+		if (form[0].checkValidity() === false) {
+			event.stopPropagation();
+		}else{
+			register();
+		}
+		form.addClass('was-validated');
+	});
+
+	//忘记密码表单提交事件
+	$(".my-forget-validation").submit(function() {
+		let form = $(this);
+		event.preventDefault();
+		if (form[0].checkValidity() === false) {
+			event.stopPropagation();
+		}else{
+			forget();
+		}
+		form.addClass('was-validated');
+	});
+
+	//密码重置表单提交事件
+	$(".my-reset-validation").submit(function() {
+		let form = $(this);
+		event.preventDefault();
+		if (form[0].checkValidity() === false) {
+			event.stopPropagation();
+		}else{
+			reset();
+		}
 		form.addClass('was-validated');
 	});
 
@@ -70,56 +108,76 @@ $(function() {
 
 //登录表单提交方法
 function loginM(){
-	event.preventDefault();
+	let fields = $("#loginForm").serializeArray();
+	let obj = {};
+	$.each(fields, function(index, field) {
+		obj[field.name] = field.value;
+	})
 	$.ajax({
 		type: "post",
 		url: "/user/login",
-		contentType: "application/json;charse=UTF-8",
-		data: $('#loginForm').serializeArray(),
+		contentType: "application/json;charset=UTF-8",
+		data: JSON.stringify(obj),
+		datatype: "json",
 		success:function (data){
-
+			$("#message").append(this.data).modal();
 		}
 	})
 }
 
 //注册表单提交方法
 function register(){
-	event.preventDefault();
+	let fields = $("#registerForm").serializeArray();
+	let obj = {};
+	$.each(fields, function(index, field) {
+		obj[field.name] = field.value;
+	})
 	$.ajax({
 		type: "post",
 		url: "/user/register",
-		contentType: "application/json;charse=UTF-8",
-		data: $('#registerForm').serializeArray(),
+		contentType: "application/json;charset=UTF-8",
+		data: JSON.stringify(obj),
+		datatype: "json",
 		success:function (data){
-
+			$("#message").append(this.data).modal();
 		}
 	})
 }
 
 //忘记密码表单提交方法
 function forget(){
-	event.preventDefault();
+	let fields = $("#forgetForm").serializeArray();
+	let obj = {};
+	$.each(fields, function(index, field) {
+		obj[field.name] = field.value;
+	})
 	$.ajax({
 		type: "post",
 		url: "/user/forget",
-		contentType: "application/json;charse=UTF-8",
-		data: $('#forgetForm').serializeArray(),
+		contentType: "application/json;charset=UTF-8",
+		data: JSON.stringify(obj),
+		datatype: "json",
 		success:function (data){
-
+			$("#message").append(this.data).modal();
 		}
 	})
 }
 
 //重置密码表单提交方法
 function reset(){
-	event.preventDefault();
+	let fields = $("#resetForm").serializeArray();
+	let obj = {};
+	$.each(fields, function(index, field) {
+		obj[field.name] = field.value;
+	})
 	$.ajax({
 		type: "post",
 		url: "/user/reset",
-		contentType: "application/json;charse=UTF-8",
-		data: $('#resetForm').serializeArray(),
+		contentType: "application/json;charset=UTF-8",
+		data: JSON.stringify(obj),
+		datatype: "json",
 		success:function (data){
-
+			$("#message").append(this.data).modal();
 		}
 	})
 }
