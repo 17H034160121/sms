@@ -1,10 +1,10 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<meta name="author" content="Kodinger">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<title>My Login Page &mdash; Bootstrap 4 Login Page Snippet</title>
+	<title>SMS密码重置</title>
 	<link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="/css/my-login.css">
 </head>
@@ -18,22 +18,22 @@
 					</div>
 					<div class="card fat">
 						<div class="card-body">
-							<h4 class="card-title">Reset Password</h4>
-							<form method="POST" class="my-login-validation" novalidate="">
+							<h4 class="card-title">密码重置</h4>
+							<form id="resetForm" method="POST" class="my-login-validation" novalidate="" onclick="reset()">
 								<div class="form-group">
-									<label for="new-password">New Password</label>
+									<label for="new-password">新密码</label>
 									<input id="new-password" type="password" class="form-control" name="password" required autofocus data-eye>
 									<div class="invalid-feedback">
-										Password is required
+										新密码不能为空
 									</div>
 									<div class="form-text text-muted">
-										Make sure your password is strong and easy to remember
+										确认密码
 									</div>
 								</div>
 
 								<div class="form-group m-0">
 									<button type="submit" class="btn btn-primary btn-block">
-										Reset Password
+										重置密码
 									</button>
 								</div>
 							</form>
@@ -46,6 +46,22 @@
 			</div>
 		</div>
 	</section>
+
+	<!-- 提示框 -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">提示</h4>
+				</div>
+				<div class="modal-body" id="message"></div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">确认</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal -->
+	</div>
 
 	<script src="/js/jquery/jquery-3.3.1.min.js"></script>
 	<script src="/js/bootstrap/bootstrap.min.js"></script>

@@ -1,12 +1,9 @@
 
 $(function() {
 
-	// author badge :)
-	var author = '<div style="position: fixed;bottom: 0;right: 20px;background-color: #fff;box-shadow: 0 4px 8px rgba(0,0,0,.05);border-radius: 3px 3px 0 0;font-size: 12px;padding: 5px 10px;">By <a href="https://twitter.com/mhdnauvalazhar">@mhdnauvalazhar</a> &nbsp;&bull;&nbsp; <a href="https://www.buymeacoffee.com/mhdnauvalazhar">Buy me a Coffee</a></div>';
-	$("body").append(author);
-
+	//为空检查
 	$("input[type='password'][data-eye]").each(function(i) {
-		var $this = $(this),
+		let $this = $(this),
 			id = 'eye-password-' + i,
 			el = $('#' + id);
 
@@ -19,7 +16,7 @@ $(function() {
 			paddingRight: 60
 		});
 		$this.after($("<div/>", {
-			html: 'Show',
+			html: '显示',
 			class: 'btn btn-primary btn-sm',
 			id: 'passeye-toggle-'+i,
 		}).css({
@@ -36,7 +33,7 @@ $(function() {
 			id: 'passeye-' + i
 		}));
 
-		var invalid_feedback = $this.parent().parent().find('.invalid-feedback');
+		let invalid_feedback = $this.parent().parent().find('.invalid-feedback');
 
 		if(invalid_feedback.length) {
 			$this.after(invalid_feedback.clone());
@@ -59,12 +56,128 @@ $(function() {
 		});
 	});
 
+	//登录表单提交事件
 	$(".my-login-validation").submit(function() {
-		var form = $(this);
-        if (form[0].checkValidity() === false) {
-          event.preventDefault();
+		let form = $(this);
+		event.preventDefault();
+		if (form[0].checkValidity() === false) {
           event.stopPropagation();
-        }
+        }else{
+			loginM();
+		}
 		form.addClass('was-validated');
 	});
+
+	//注册表单提交事件
+	$(".my-register-validation").submit(function() {
+		let form = $(this);
+		event.preventDefault();
+		if (form[0].checkValidity() === false) {
+			event.stopPropagation();
+		}else{
+			register();
+		}
+		form.addClass('was-validated');
+	});
+
+	//忘记密码表单提交事件
+	$(".my-forget-validation").submit(function() {
+		let form = $(this);
+		event.preventDefault();
+		if (form[0].checkValidity() === false) {
+			event.stopPropagation();
+		}else{
+			forget();
+		}
+		form.addClass('was-validated');
+	});
+
+	//密码重置表单提交事件
+	$(".my-reset-validation").submit(function() {
+		let form = $(this);
+		event.preventDefault();
+		if (form[0].checkValidity() === false) {
+			event.stopPropagation();
+		}else{
+			reset();
+		}
+		form.addClass('was-validated');
+	});
+
 });
+
+//登录表单提交方法
+function loginM(){
+	let fields = $("#loginForm").serializeArray();
+	let obj = {};
+	$.each(fields, function(index, field) {
+		obj[field.name] = field.value;
+	})
+	$.ajax({
+		type: "post",
+		url: "/user/login",
+		contentType: "application/json;charset=UTF-8",
+		data: JSON.stringify(obj),
+		datatype: "json",
+		success:function (data){
+			$("#message").append(this.data).modal();
+		}
+	})
+}
+
+//注册表单提交方法
+function register(){
+	let fields = $("#registerForm").serializeArray();
+	let obj = {};
+	$.each(fields, function(index, field) {
+		obj[field.name] = field.value;
+	})
+	$.ajax({
+		type: "post",
+		url: "/user/register",
+		contentType: "application/json;charset=UTF-8",
+		data: JSON.stringify(obj),
+		datatype: "json",
+		success:function (data){
+			$("#message").append(this.data).modal();
+		}
+	})
+}
+
+//忘记密码表单提交方法
+function forget(){
+	let fields = $("#forgetForm").serializeArray();
+	let obj = {};
+	$.each(fields, function(index, field) {
+		obj[field.name] = field.value;
+	})
+	$.ajax({
+		type: "post",
+		url: "/user/forget",
+		contentType: "application/json;charset=UTF-8",
+		data: JSON.stringify(obj),
+		datatype: "json",
+		success:function (data){
+			$("#message").append(this.data).modal();
+		}
+	})
+}
+
+//重置密码表单提交方法
+function reset(){
+	let fields = $("#resetForm").serializeArray();
+	let obj = {};
+	$.each(fields, function(index, field) {
+		obj[field.name] = field.value;
+	})
+	$.ajax({
+		type: "post",
+		url: "/user/reset",
+		contentType: "application/json;charset=UTF-8",
+		data: JSON.stringify(obj),
+		datatype: "json",
+		success:function (data){
+			$("#message").append(this.data).modal();
+		}
+	})
+}

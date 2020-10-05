@@ -6,7 +6,6 @@ public class UserDto implements Serializable {
     private int id;
     private String username;
     private String password;
-    //TODO 修改枚举类型
     private String authority;
 
     public int getId() {
