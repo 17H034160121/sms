@@ -1,8 +1,10 @@
 package cn.cjlu.controller;
 
 import cn.cjlu.form.UserForm;
+import cn.cjlu.global.GlobalConstant;
 import cn.cjlu.global.MsgConstant;
 import cn.cjlu.service.UserService;
+import cn.cjlu.vo.MessageVo;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import sun.plugin2.message.Message;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -31,13 +34,13 @@ public class UserController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
-    public String login(@RequestBody UserForm userForm, HttpServletRequest request, HttpServletResponse response) {
+    public MessageVo login(@RequestBody UserForm userForm, HttpServletRequest request, HttpServletResponse response) {
         logger.info("用户登录方法开始");
         if (userService.findUser(userForm)) {
 
             //将cookie存储到本地服务器作为校验
             HttpSession session = request.getSession();
-            session.setAttribute("loginUserCookie",userForm.getUsername());
+            session.setAttribute(GlobalConstant.ONLINE_COOKIE, userForm.getUsername());
 
             logger.info("存储username进入session");
 
@@ -50,22 +53,23 @@ public class UserController {
 
             //重定向到商品管理视图
             try {
-                response.sendRedirect(request.getContextPath() + "/commodity");
+                response.sendRedirect(request.getContextPath() + "/commodity/detail");
             } catch (IOException e) {
                 e.printStackTrace();
             } finally {
                 logger.error("登录重定向出现异常");
             }
-            return null;
         }
 
+        MessageVo returnMessage = new MessageVo();
+        returnMessage.setMessage(MsgConstant.LOGIN_ERROR);
         //返回用户错误信息
-        return MsgConstant.LOGIN_ERROR;
+        return returnMessage;
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     @ResponseBody
-    public String register(@RequestBody UserForm userForm, HttpServletRequest request, HttpServletResponse response) {
+    public MessageVo register(@RequestBody UserForm userForm, HttpServletRequest request, HttpServletResponse response) {
         logger.info("开始用户注册方法");
         String message = userService.registerUser(userForm);
         if (message.isEmpty()) {
@@ -80,12 +84,14 @@ public class UserController {
             return null;
         }
 
-        return message;
+        MessageVo returnMessage = new MessageVo();
+        returnMessage.setMessage(message);
+        return returnMessage;
     }
 
     @RequestMapping(value = "/forget", method = RequestMethod.POST)
     @ResponseBody
-    public String forget(@RequestBody UserForm userForm, HttpServletRequest request, HttpServletResponse response){
+    public MessageVo forget(@RequestBody UserForm userForm, HttpServletRequest request, HttpServletResponse response){
         logger.info("开始用户忘记密码方法");
         if(userService.findUser(userForm)){
             //重定向到重置密码页面
@@ -95,7 +101,9 @@ public class UserController {
                 e.printStackTrace();
             }
         }
-        return MsgConstant.FORGET_CHECK_ERROR;
+        MessageVo returnMessage = new MessageVo();
+        returnMessage.setMessage(MsgConstant.FORGET_CHECK_ERROR);
+        return returnMessage;
     }
 
     @RequestMapping(value = "/reset", method = RequestMethod.POST)

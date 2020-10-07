@@ -6,14 +6,14 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta charset="utf-8"/>
-    <title>jqGrid - Ace Admin</title>
+    <title>SMS商品详情管理</title>
 
     <meta name="description" content="Dynamic tables and grids using jqGrid plugin"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
 
     <!-- bootstrap & fontawesome -->
-    <link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css"/>
-    <link rel="stylesheet" href="/font-awesome/4.5.0/css/font-awesome.min.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/font-awesome.min.css"/>
 
     <!-- page specific plugin styles -->
     <link rel="stylesheet" href="/css/jquery/jquery-ui.min.css"/>
@@ -128,45 +128,54 @@
             <div class="page-content">
                 <div class="row">
                     <div class="col-xs-12">
-                        <form class="form-inline col-md-8" style="margin: 10px" action="${pageContext.request.contextPath}/FindByPageServlet?goTo=culturePage.jsp&type=Culture" method="post">
-                            <div class="form-group col-md-5">
-                                <label for="id">编号</label>
-                                <input type="text" class="form-control" id="id" placeholder="编号" name="id" value="${condition.id[0]}">
+                        <form id="commoditySearchForm" class="form-inline col-md-10" style="margin: 10px" action="/commodity/search" method="post">
+                            <div class="form-group col-md-3">
+                                <label for="name">商品名</label>
+                                <input type="text" class="form-control" id="name" placeholder="编号" name="name" value="">
                             </div>
-                            <div class="form-group col-md-5">
-                                <label for="name">风景名</label>
-                                <input type="text" class="form-control" id="name" placeholder="文化名" name="name" value="${condition.name[0]}">
+                            <div class="form-group col-md-3">
+                                <label for="qrCode">二维编码</label>
+                                <input type="text" class="form-control" id="qrCode" placeholder="二维编码" name="qrCode" value="">
                             </div>
-                            <button type="submit" class="btn btn-default">查询</button>
+                            <div class="form-group col-md-3">
+                                <label for="description">描述</label>
+                                <input type="text" class="form-control" id="description" placeholder="描述" name="description" value="">
+                            </div>
+                            <button type="submit" class="btn btn-default pull-right">查询</button>
                         </form>
 
-                        <a class="btn btn-primary col-md-1 pull-right" style="margin-right: 5px" href="${pageContext.request.contextPath}/back/cultureForm.jsp">添加</a>
+                        <a class="btn btn-primary col-md-1 pull-right" id="addButton" onclick="addModal()" >添加</a>
                         <a class="btn btn-primary col-md-1 pull-right" id="delSelected">删除选中</a>
 
-                        <form id="form" action="${pageContext.request.contextPath}/DelSelectedServlet?type=Culture" method="post">
+                        <form id="selectForm" action="/commodity/delete" method="post">
                             <table class="table table-hover col-xs-12 " id="grid-table"
                                    style="text-align: center;font-size: 15px; table-layout: fixed;">
                                 <tr class="info">
                                     <td width="5%"><input type="checkbox" id="firstCb"></td>
-                                    <td width="10%">操作</td>
                                     <td width="5%">编号</td>
-                                    <td width="10%">文化名称</td>
-                                    <td width="50%">介绍</td>
-                                    <td width="20%">时间</td>
+                                    <td width="10%">商品名</td>
+                                    <td width="10%">二维编码</td>
+                                    <td width="40%">描述</td>
+                                    <td width="10%">价格</td>
+                                    <td width="10%">数量</td>
+                                    <td width="10%">操作</td>
                                 </tr>
-                                <c:forEach items="${pageBean.list}" var="view">
+                                <c:forEach items="${page.beanList}" var="commodity">
                                     <tr>
-                                        <td><input type="checkbox" name="uid" value="${view.id}"></td>
+                                        <td><input type="checkbox" name="uid" value="${commodity.id}"></td>
+                                        <td>${commodity.id}</td>
+                                        <td>${commodity.name}</td>
+                                        <td style="overflow: hidden;text-overflow: ellipsis;
+                                            white-space: nowrap;">${commodity.qrCode}</td>
+                                        <td style="overflow: hidden;text-overflow: ellipsis;
+                                            white-space: nowrap;">${commodity.description}</td>
+                                        <td style="overflow: hidden;text-overflow: ellipsis;
+                                            white-space: nowrap;">${commodity.price}</td>
+                                        <td>${commodity.num}</td>
                                         <td>
-                                            <a class="ace-icon fa fa-pencil  light-blue bigger-110" title="修改" href="${pageContext.request.contextPath}/FindOnlyServlet?id=${view.id}&type=Culture"></a>
-                                            <a class="ace-icon fa fa-trash  light-blue bigger-110" title="删除" href="javascript:deleteOnly(${view.id});"></a>
+                                            <a class="ace-icon fa fa-pencil  light-blue bigger-110" title="修改" id="updateButton" onclick="editOnly(${commodity.id})"></a>
+                                            <a class="ace-icon fa fa-trash  light-blue bigger-110" title="删除" id="deleteButton" onclick="deleteOnly(${commodity.id})"></a>
                                         </td>
-                                        <td>${view.id}</td>
-                                        <td>${view.name}</td>
-                                        <td style="overflow: hidden;text-overflow: ellipsis;
-                                            white-space: nowrap;">${view.introduce}</td>
-                                        <td style="overflow: hidden;text-overflow: ellipsis;
-                                            white-space: nowrap;">${view.time}</td>
                                     </tr>
                                 </c:forEach>
                             </table>
@@ -174,7 +183,7 @@
                         <div class="col-md-5"></div>
                         <nav class="col-md-5" aria-label="Page navigation">
                             <ul class="pagination">
-                                <c:if test="${pageBean.currentPage == 1}">
+                                <c:if test="${page.pageIndex == 1}">
                                     <li class="disabled">
                                         <a href="#"
                                            aria-label="Previous">
@@ -183,28 +192,28 @@
                                     </li>
                                 </c:if>
 
-                                <c:if test="${pageBean.currentPage != 1}">
+                                <c:if test="${page.pageIndex != 1}">
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/FindByPageServlet?currentPage=${pageBean.currentPage-1}&rows=5&goTo=culturePage.jsp&type=Culture&id=${condition.id[0]}&name=${condition.name[0]}"
+                                        <a onclick="movePrevious(${page.pageIndex})"
                                            aria-label="Previous">
                                             <span aria-hidden="true">&laquo;</span>
                                         </a>
                                     </li>
                                 </c:if>
-                                <c:forEach begin="1" end="${pageBean.totalPage}" var="i">
-                                    <c:if test="${pageBean.currentPage==i}">
-                                        <li class="active"><a href="${pageContext.request.contextPath}/FindByPageServlet?currentPage=${i}&rows=5&goTo=culturePage.jsp&type=Culture&id=${condition.id[0]}&name=${condition.name[0]}">${i}</a>
+                                <c:forEach begin="1" end="${page.totalPage}" var="i">
+                                    <c:if test="${page.pageIndex==i}">
+                                        <li class="active"><a id="target">${i}</a>
                                         </li>
                                     </c:if>
-                                    <c:if test="${pageBean.currentPage!=i}">
+                                    <c:if test="${page.pageIndex!=i}">
                                         <li>
-                                            <a href="${pageContext.request.contextPath}/FindByPageServlet?currentPage=${i}&rows=5&goTo=culturePage.jsp&type=Culture&id=${condition.id[0]}&name=${condition.name[0]}">${i}</a>
+                                            <a onclick="moveTarget(${i})">${i}</a>
                                         </li>
                                     </c:if>
                                 </c:forEach>
 
 
-                                <c:if test="${pageBean.currentPage == pageBean.totalPage}">
+                                <c:if test="${page.pageIndex == page.totalPage}">
                                     <li class="disabled">
                                         <a href="#"
                                            aria-label="Next">
@@ -213,9 +222,9 @@
                                     </li>
                                 </c:if>
 
-                                <c:if test="${pageBean.currentPage != pageBean.totalPage}">
+                                <c:if test="${page.pageIndex != page.totalPage}">
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/FindByPageServlet?currentPage=${pageBean.currentPage+1}&rows=5&goTo=culturePage.jsp&type=Culture&id=${condition.id[0]}&name=${condition.name[0]}"
+                                        <a onclick="moveAfter(${page.pageIndex})"
                                            aria-label="Next">
                                             <span aria-hidden="true">&raquo;</span>
                                         </a>
@@ -223,7 +232,7 @@
                                 </c:if>
 
                                 <span style="font-size: 20px; margin-left: 5px">
-                                    共有${pageBean.totalCount}条记录,分为${pageBean.totalPage}页.
+                                    共有${page.totalPage}页.
                                 </span>
                             </ul>
                         </nav>
@@ -242,21 +251,6 @@
 							<span class="blue bolder">超市管理系统（SMS）</span>
                             Copyright &copy; 2020 &mdash; CJLU
 						</span>
-
-                &nbsp; &nbsp;
-                <span class="action-buttons">
-							<a href="#">
-								<i class="ace-icon fa fa-qq light-blue bigger-150"></i>
-							</a>
-
-							<a href="#">
-								<i class="ace-icon fa fa-weibo text-primary bigger-150"></i>
-							</a>
-
-							<a href="#">
-								<i class="ace-icon fa fa-weixin orange bigger-150"></i>
-							</a>
-						</span>
             </div>
         </div>
     </div>
@@ -264,10 +258,67 @@
     <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
         <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
     </a>
+    <!-- 提示框 -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title pull-left" id="myModalLabel">提示</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body" id="message"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">确认</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+    <div class="modal fade" id="commodityModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">商品详情</h4>
+                </div>
+                <form action="" method="post" id="commodityForm">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label class="control-label" for="id1">编号</label>
+                            <input type="text" class="form-control" name="id" value="" id="id1" readonly="readonly">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="name1">商品名</label>
+                            <input type="text" class="form-control" name="name" value="" id="name1">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="qrCode1">二维编码</label>
+                            <input type="text" class="form-control" name="qrCode" value="" id="qrCode1">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="num">数量</label>
+                            <input type="text" class="form-control" name="num" value="" id="num">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="description1">描述</label>
+                            <input type="text" class="form-control" name="description" value="" id="description1">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="price">价格</label>
+                            <input type="text" class="form-control" name="price" value="" id="price">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">确认</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 </div><!-- /.main-container -->
 
-<script src="/js/detail.js"></script>
-<!-- basic scripts -->
 
 <!--[if !IE]> -->
 <script src="/js/jquery/jquery-2.1.4.min.js"></script>
@@ -280,7 +331,7 @@
 <script type="text/javascript">
     if ('ontouchstart' in document.documentElement) document.write("<script src='/js/jquery/jquery.mobile.custom.min.js'>" + "<" + "/script>");
 </script>
-<script src="/js/bootstrap/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
 
 <!-- page specific plugin scripts -->
 <script src="/js/bootstrap/bootstrap-datepicker.min.js"></script>
@@ -290,5 +341,7 @@
 <!-- ace scripts -->
 <script src="/js/ace/ace-elements.min.js"></script>
 <script src="/js/ace/ace.min.js"></script>
+<script src="/js/detail.js"></script>
+
 </body>
 </html>

@@ -1,17 +1,14 @@
-package cn.cjlu.dto;
+package cn.cjlu.form;
 
-import cn.cjlu.global.CommodityOperateType;
-import cn.cjlu.global.CommodityType;
-
-import java.io.Serializable;
-
-public class CommodityDto implements Serializable {
+/**
+ * @create: 2020-10-07 14:37
+ */
+public class CommodityForm {
     private int id;
     private String name;
     private String qrCode;
     private int num;
     private String description;
-    private CommodityType type;
     private double price;
 
     public int getId() {
@@ -52,14 +49,6 @@ public class CommodityDto implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public CommodityType getType() {
-        return type;
-    }
-
-    public void setType(CommodityType type) {
-        this.type = type;
     }
 
     public double getPrice() {

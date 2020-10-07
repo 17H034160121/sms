@@ -6,4 +6,7 @@ package cn.cjlu.global;
 public class GlobalConstant {
     //用户权限相关常量
     public final static String DEFAULT_USER_AUTHORITY = "2";
+
+    //session在线用户cookie的Attribute
+    public final static String ONLINE_COOKIE = "loginUserCookie";
 }

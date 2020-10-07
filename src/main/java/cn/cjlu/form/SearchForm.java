@@ -1,25 +1,43 @@
-package cn.cjlu.dto;
+package cn.cjlu.form;
 
 import cn.cjlu.global.CommodityOperateType;
-import cn.cjlu.global.CommodityType;
 
-import java.io.Serializable;
-
-public class CommodityDto implements Serializable {
-    private int id;
+/**
+ * @create: 2020-10-05 15:22
+ */
+public class SearchForm {
     private String name;
     private String qrCode;
     private int num;
     private String description;
-    private CommodityType type;
+    private CommodityOperateType type;
     private double price;
+    private int startPage;
+    private int pageNum;
+    private int startIndex;
 
-    public int getId() {
-        return id;
+    public int getStartIndex() {
+        return startIndex;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setStartIndex(int startIndex) {
+        this.startIndex = startIndex;
+    }
+
+    public int getStartPage() {
+        return startPage;
+    }
+
+    public void setStartPage(int startPage) {
+        this.startPage = startPage;
+    }
+
+    public int getPageNum() {
+        return pageNum;
+    }
+
+    public void setPageNum(int pageNum) {
+        this.pageNum = pageNum;
     }
 
     public String getName() {
@@ -54,11 +72,11 @@ public class CommodityDto implements Serializable {
         this.description = description;
     }
 
-    public CommodityType getType() {
+    public CommodityOperateType getType() {
         return type;
     }
 
-    public void setType(CommodityType type) {
+    public void setType(CommodityOperateType type) {
         this.type = type;
     }
 

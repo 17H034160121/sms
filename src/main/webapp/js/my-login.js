@@ -120,7 +120,9 @@ function loginM(){
 		data: JSON.stringify(obj),
 		datatype: "json",
 		success:function (data){
-			$("#message").append(this.data).modal();
+			$("#message").empty();
+			$("#message").append(data['message']);
+			$("#myModal").modal();
 		}
 	})
 }
@@ -139,7 +141,9 @@ function register(){
 		data: JSON.stringify(obj),
 		datatype: "json",
 		success:function (data){
-			$("#message").append(this.data).modal();
+			$("#message").empty();
+			$("#message").append(data['message']);
+			$("#myModal").modal();
 		}
 	})
 }
@@ -158,7 +162,9 @@ function forget(){
 		data: JSON.stringify(obj),
 		datatype: "json",
 		success:function (data){
-			$("#message").append(this.data).modal();
+			$("#message").empty();
+			$("#message").append(data['message']);
+			$("#myModal").modal();
 		}
 	})
 }
@@ -177,7 +183,9 @@ function reset(){
 		data: JSON.stringify(obj),
 		datatype: "json",
 		success:function (data){
-			$("#message").append(this.data).modal();
+			$("#message").empty();
+			$("#message").append(data['message']);
+			$("#myModal").modal();
 		}
 	})
 }
