@@ -22,7 +22,7 @@
 							<form id="registerForm" method="POST" class="my-register-validation" novalidate="" onclick="register()">
 
 								<div class="form-group">
-									<label for="username">E-Mail Address</label>
+									<label for="username">用户名</label>
 									<input id="username" type="text" class="form-control" name="username" required>
 									<div class="invalid-feedback">
 										用户名不能为空
@@ -30,7 +30,7 @@
 								</div>
 
 								<div class="form-group">
-									<label for="password">Password</label>
+									<label for="password">密码</label>
 									<input id="password" type="password" class="form-control" name="password" required data-eye>
 									<div class="invalid-feedback">
 										密码不能为空
@@ -38,7 +38,7 @@
 								</div>
 
 								<div class="form-group">
-									<label for="re-password">RePassword</label>
+									<label for="re-password">再次输入密码</label>
 									<input id="re-password" type="password" class="form-control" name="re-password" required data-eye>
 									<div class="invalid-feedback">
 										两次输入密码不一致

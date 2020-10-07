@@ -10,6 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomeController {
 
     @RequestMapping("/")
+    public String homePage(){
+        return "/login/login";
+    }
+
+    @RequestMapping("/login")
     public String loginPage(){
         return "/login/login";
     }

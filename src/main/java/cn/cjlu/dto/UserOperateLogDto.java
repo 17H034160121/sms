@@ -5,7 +5,7 @@ import cn.cjlu.global.UserOperateType;
 import java.io.Serializable;
 import java.util.Date;
 
-public class UserOperateLog implements Serializable {
+public class UserOperateLogDto implements Serializable {
     private int id;
     private int operatorId;
     private Date date;
