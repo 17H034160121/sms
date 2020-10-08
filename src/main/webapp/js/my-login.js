@@ -145,9 +145,13 @@ function register(){
 		data: JSON.stringify(obj),
 		datatype: "json",
 		success:function (data){
-			$("#message").empty();
-			$("#message").append(data['message']);
-			$("#myModal").modal();
+			if(data.length == 0) {
+				$("#message").empty();
+				$("#message").append(data['message']);
+				$("#myModal").modal();
+			}else {
+				window.location.href = "/";
+			}
 		}
 	})
 }
