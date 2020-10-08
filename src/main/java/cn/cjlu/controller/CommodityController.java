@@ -33,7 +33,7 @@ public class CommodityController {
 
     @RequestMapping(value = "/detail")
     public String detail(Model model){
-        logger.info("商品详情无条件查询方法开始");
+        logger.info("商品详情无条件查询方法开始");     
         SearchForm searchForm = new SearchForm();
         searchForm.setStartPage(1);
         searchForm.setStartIndex(0);
