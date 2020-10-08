@@ -44,4 +44,12 @@
         </property>
     </bean>
 
+    <!-- 登录拦截器暂不使用，因为本地localhost为相同站点，导致set-cookie无法使用，至少需要两个站点 -->
+<!--    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/commodity/**"/>
+            <bean class="cn.cjlu.interceptor.LoginInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>-->
+
 </beans>

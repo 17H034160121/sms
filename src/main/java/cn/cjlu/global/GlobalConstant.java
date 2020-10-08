@@ -9,4 +9,8 @@ public class GlobalConstant {
 
     //session在线用户cookie的Attribute
     public final static String ONLINE_COOKIE = "loginUserCookie";
+
+    //cookie中存储对应session的name
+    public final static String JSESSION = "JSESSIONID";
+
 }
