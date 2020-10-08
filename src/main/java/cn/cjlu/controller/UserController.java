@@ -37,19 +37,17 @@ public class UserController {
     public MessageVo login(@RequestBody UserForm userForm, HttpServletRequest request, HttpServletResponse response) {
         logger.info("用户登录方法开始");
         if (userService.findUser(userForm)) {
+            //创建cookie并设置一天有效时间
+            Cookie cookie = new Cookie(GlobalConstant.ONLINE_COOKIE, userForm.getUsername());
+            cookie.setMaxAge(60 * 12);
+            response.addCookie(cookie);
+
+            logger.info("用户[" + userForm.getUsername() + "]登录创建当天cookie");
 
             //将cookie存储到本地服务器作为校验
             HttpSession session = request.getSession();
             session.setAttribute(GlobalConstant.ONLINE_COOKIE, userForm.getUsername());
-
             logger.info("存储username进入session");
-
-            //创建cookie并设置一天有效时间
-            Cookie cookie = new Cookie("JSESSIONID", session.getId());
-            cookie.setMaxAge(60 * 12);
-            response.addCookie(cookie);
-
-            logger.info("用户[" + userForm.getUsername() + "]登录创建当天cookie：" + cookie.toString());
 
             //重定向到商品管理视图
             try {

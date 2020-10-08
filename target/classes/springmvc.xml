@@ -43,5 +43,11 @@
             </list>
         </property>
     </bean>
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/commodity/**"/>
+            <bean class="cn.cjlu.interceptor.LoginInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
 
 </beans>

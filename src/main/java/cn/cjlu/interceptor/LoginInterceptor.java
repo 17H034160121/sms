@@ -31,7 +31,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 
         for(int i=0; i< cookies.length; i++){
             Cookie one = cookies[i];
-            if(GlobalConstant.ONLINE_COOKIE.equals(one.getName())){
+            if(GlobalConstant.ONLINE_COOKIE.equals(one.getName()) && one.getValue().equals(cookie)){
                 return true;
             }
         }
