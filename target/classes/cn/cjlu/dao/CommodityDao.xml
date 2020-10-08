@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.cjlu.dao.CommodityDao">
+    <select id="findByCommodity" parameterType="cn.cjlu.form.SearchForm"
+            resultType="cn.cjlu.dto.CommodityDto">
+        select  * from commodity where 1=1
+        <if test="name!=null">
+            and name like "%"#{name}"%"
+        </if>
+        <if test="qrCode!=null">
+            and qrCode like "%"#{qrCode}"%"
+        </if>
+        <if test="description!=null">
+            and description like "%"#{description}"%"
+        </if>
+        limit #{startIndex}, #{pageNum}
+
+    </select>
+
+    <select id="findTotalNum" parameterType="cn.cjlu.form.SearchForm"
+            resultType="int">
+        select  count(1) from commodity where 1=1
+        <if test="name!=null">
+            and name like "%"#{name}"%"
+        </if>
+        <if test="qrCode!=null">
+            and qrCode like "%"#{qrCode}"%"
+        </if>
+        <if test="description!=null">
+            and description like "%"#{description}"%"
+        </if>
+
+    </select>
+</mapper>
