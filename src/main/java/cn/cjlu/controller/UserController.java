@@ -1,4 +1,4 @@
-package cn.cjlu.controller;
+﻿package cn.cjlu.controller;
 
 import cn.cjlu.form.UserForm;
 import cn.cjlu.global.GlobalConstant;
@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import sun.plugin2.message.Message;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+
 
 /**
  * @create: 2020-10-03 08:53
