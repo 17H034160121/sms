@@ -19,7 +19,7 @@
 					<div class="card fat">
 						<div class="card-body">
 							<h4 class="card-title">注册</h4>
-							<form id="registerForm" method="POST" class="my-register-validation" novalidate="" onclick="register()">
+							<form id="registerForm" method="POST" class="my-register-validation" novalidate="">
 
 								<div class="form-group">
 									<label for="username">用户名</label>
